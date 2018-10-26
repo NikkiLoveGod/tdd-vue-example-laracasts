@@ -22,13 +22,13 @@ describe('CounterSFC', () => {
   })
   
   it('Decrements the count when the decrement button is clicked', () => {
-    expect(wrapper.vm.count).toBe(0)
+    wrapper.setData({
+      count: 5
+    })
 
-    wrapper.find('.increment').trigger('click') // 1 
-    wrapper.find('.increment').trigger('click') // 2
-    wrapper.find('.decrement').trigger('click') // 1
+    wrapper.find('.decrement').trigger('click') // 4
 
-    expect(wrapper.vm.count).toBe(1)
+    expect(wrapper.vm.count).toBe(4)
   })
   
   it('Never goes below zero', () => {
