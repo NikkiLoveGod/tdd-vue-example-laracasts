@@ -37,6 +37,12 @@ describe('CounterSFC', () => {
     expect(wrapper.vm.count).toBe(0)
   })
   
+  it('Hides decrement button on 0', () => {
+    expect(wrapper.find('.decrement').hasStyle('display', 'none')).toBe(true)
+    wrapper.setData({ count: 1 })
+    expect(wrapper.find('.decrement').hasStyle('display', 'none')).toBe(false)
+  })
+  
   it('Displays the current count', () => {
     expect(wrapper.find('.count').html()).toContain(0)
     wrapper.find('button').trigger('click')
