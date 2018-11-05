@@ -14,12 +14,17 @@
       <button id="cancel" @click="cancel">Cancel</button>
       <button id="update" @click="update">Update</button>
     </div>
+    
+    <p v-if="feedback" class="feedback">{{ feedback }}</p>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     props: ['dataQuestion'],
+    
     data() {
       return {
         question: { ...this.dataQuestion },
@@ -27,7 +32,8 @@
           title: this.dataQuestion.title,  
           body: this.dataQuestion.body,  
         },
-        editing: false
+        editing: false,
+        feedback: false
       }
     },
     
@@ -40,6 +46,11 @@
         this.question.title = this.form.title
         this.question.body = this.form.body
         this.editing = false
+        
+        axios.post('/questions/1/')
+          .then(() => {
+            this.feedback = "Question updated successfully"
+          })
       }
     }
   }
